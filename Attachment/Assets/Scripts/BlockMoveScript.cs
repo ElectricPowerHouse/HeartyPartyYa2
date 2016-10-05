@@ -9,6 +9,9 @@ public class BlockMoveScript : MonoBehaviour {
 	private float speed;
 
 
+    private float rotateMin = 0.5f;
+    private float rotateMax = -0.5f;
+    private float rotateAmount;
 
 	public float changeAmount = 0.05f;
 
@@ -25,6 +28,8 @@ public class BlockMoveScript : MonoBehaviour {
 
 		speed = startSpeed + Random.Range(-100,0);
 
+        rotateAmount = Random.Range(rotateMin, rotateMax);
+
         block.SetActive(true);
         rigidBody = GetComponent<Rigidbody2D>();
 
@@ -38,7 +43,7 @@ public class BlockMoveScript : MonoBehaviour {
 		time = Time.timeSinceLevelLoad/25;
 
 
-        transform.Rotate(Vector3.forward * -0.2f);
+        transform.Rotate(Vector3.forward * rotateAmount);
 
 		velocity = new Vector2 (0, speed);
         rigidBody.velocity = velocity;

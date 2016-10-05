@@ -16,11 +16,22 @@ public class SpawnerScript : MonoBehaviour {
 
 	public float changeSpawn = 0.00001f;
 
+
+    public float maxRate;
+    public float minRate;
 	public float rate;
 
 
-	private float blockDelay = 1f;
-    public float captureDelay = 2f;
+
+    private float blockDelayMin = 0.6f;
+    private float blockDelayMax = 1.5f;
+    private float blockDelay = 1f;
+
+    private float captureDelayMin = 8f;
+    private float captureDelayMax = 16;
+    public float captureDelay = 10f;
+
+
 	public float fuelDelay = 8f;
 
 	// Use this for initialization
@@ -66,6 +77,9 @@ public class SpawnerScript : MonoBehaviour {
 
 		Instantiate(prefabs[Random.Range(0, prefabs.Length)],newTransform.position,Quaternion.identity);
 
+        //randomize spawn rate
+        blockDelay = Random.Range(blockDelayMin, blockDelayMax);
+
         StartCoroutine(blockGenerator());
     }
 
@@ -107,6 +121,10 @@ public class SpawnerScript : MonoBehaviour {
         var newTransform = transform;
 
         Instantiate(captureBlocks[Random.Range(0, captureBlocks.Length)], newTransform.position, Quaternion.identity);
+
+
+        //randomize spawn rate
+        captureDelay = Random.Range(captureDelayMin, captureDelayMax);
 
         StartCoroutine(captureGenerator());
     }
