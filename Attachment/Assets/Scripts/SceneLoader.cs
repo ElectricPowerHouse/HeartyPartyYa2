@@ -20,14 +20,14 @@ public class SceneLoader : MonoBehaviour {
 
 	public void Update(){
 
-		if (Input.GetKeyDown ("up") || Input.GetKey ("r")) {
+		if (Input.GetKeyDown ("up") || Input.GetKeyDown ("r")) {
 			if (currentSelect <= 1) {
 				currentSelect = 3;
 			} else
 				currentSelect--;
 		}
 
-		if (Input.GetKeyDown ("down") || Input.GetKey ("f")) {
+		if (Input.GetKeyDown ("down") || Input.GetKeyDown ("f")) {
 			if (currentSelect >= 3) {
 				currentSelect = 1;
 			} else
@@ -35,7 +35,7 @@ public class SceneLoader : MonoBehaviour {
 
 		}
 
-		if (Input.GetKeyDown (KeyCode.LeftControl) || Input.GetKey ("a")) {
+		if (Input.GetKeyDown (KeyCode.LeftControl) || Input.GetKeyDown ("a")) {
 
 			enterPressed ();
 		}

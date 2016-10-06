@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour {
 
@@ -26,14 +27,14 @@ public class Pause : MonoBehaviour {
 
 		///////////////////////////////
 
-		if (Input.GetKeyDown ("up") || Input.GetKey ("r")) {
+		if (Input.GetKeyDown ("up") || Input.GetKeyDown ("r")) {
 		if (currentSelect <= 1) {
 			currentSelect = 2;
 		} else
 			currentSelect--;
 	}
 
-	if (Input.GetKeyDown ("down") || Input.GetKey ("f")) {
+	if (Input.GetKeyDown ("down") || Input.GetKeyDown ("f")) {
 			if (currentSelect >= 2) {
 			currentSelect = 1;
 		} else
@@ -41,7 +42,7 @@ public class Pause : MonoBehaviour {
 
 	}
 
-	if (Input.GetKeyDown (KeyCode.LeftControl) || Input.GetKey ("a")) {
+	if (Input.GetKeyDown (KeyCode.LeftControl) || Input.GetKeyDown ("a")) {
 
 		enterPressed ();
 	}
@@ -77,13 +78,20 @@ public void changeSelector(){
 
 public void enterPressed(){
 
+        if (!isPaused)
+        {
+
+            return;
+        }
+
+
 		switch (currentSelect) {
 
 		case 1:
 			resume ();
 			break;
 		case 2:
-			Application.LoadLevel ("MainMenu");
+			SceneManager.LoadScene ("MainMenu");
 			break;
 	
 
@@ -128,8 +136,8 @@ public void enterPressed(){
 		if (isPaused) {
 		
 			if (Input.GetKeyDown (KeyCode.LeftControl) || (Input.GetKeyDown("a"))) {
-			
-				Application.LoadLevel ("MainMenu");
+
+                SceneManager.LoadScene("MainMenu");
 			}
 		}
 	

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour {
 
@@ -19,14 +20,14 @@ public class GameOverMenu : MonoBehaviour {
 
 	public void Update(){
 
-		if (Input.GetKeyDown ("up") || Input.GetKey ("r")) {
+		if (Input.GetKeyDown ("up") || Input.GetKeyDown ("r")) {
 			if (currentSelect <= 1) {
 				currentSelect = 2;
 			} else
 				currentSelect--;
 		}
 
-		if (Input.GetKeyDown ("down") || Input.GetKey ("f")) {
+		if (Input.GetKeyDown ("down") || Input.GetKeyDown ("f")) {
 			if (currentSelect >= 2) {
 				currentSelect = 1;
 			} else
@@ -34,7 +35,7 @@ public class GameOverMenu : MonoBehaviour {
 
 		}
 
-		if (Input.GetKeyDown (KeyCode.LeftControl) || Input.GetKey ("a")) {
+		if (Input.GetKeyDown (KeyCode.LeftControl) || Input.GetKeyDown ("a")) {
 
 			enterPressed ();
 		}
@@ -68,13 +69,14 @@ public class GameOverMenu : MonoBehaviour {
 
 	public void enterPressed(){
 
+
 		switch (currentSelect) {
 
 		case 1:
-			Application.LoadLevel ("Game");
+			SceneManager.LoadScene ("Game");
 			break;
 		case 2:
-			Application.LoadLevel ("MainMenu");
+			SceneManager.LoadScene ("MainMenu");
 			break;
 
 
