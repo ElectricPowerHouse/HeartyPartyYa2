@@ -4,11 +4,19 @@ using System.Collections;
 public class MovementScript : MonoBehaviour {
 
 
+    public GameObject bar;
+    private HealthScript healthScript;
+
     float x1;
     float y1;
     float x2;
     float y2;
     public float speed = 50f;
+
+    private float boost1 = 0f;
+    private float boost2 = 0f;
+
+    private float boostAmount = 20f;
    
 
     public GameObject player1;
@@ -22,16 +30,21 @@ public class MovementScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        healthScript = bar.GetComponent<HealthScript>();
+
         rigidBody1 = player1.GetComponent<Rigidbody2D>();
         rigidBody2 = player2.GetComponent<Rigidbody2D>();
 
     }
 
-   
+
 
     // Update is called once per frame
     void Update()
     {
+
+
+
 
 
         if (Input.GetKey("d"))
@@ -76,16 +89,46 @@ public class MovementScript : MonoBehaviour {
         }
 
 
+        //accesses the script in 'bar' to take fuel away
+        if (Input.GetKeyDown("a"))
+        {
 
-        Vector2 pos1 = new Vector2(x1, y1);
-        Vector2 pos2 = new Vector2(x2, y2);
+            if (healthScript.canMove())
+            {
+                StartCoroutine(healthScript.PointRemove());
+                boost1 = boostAmount;
+            }
+
+
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+
+            if (healthScript.canMove())
+            {
+                StartCoroutine(healthScript.PointRemove());
+                boost2 = boostAmount;
+            }
+        }
+
+
+       
+        Vector2 pos1 = new Vector2(x1 * boost1, y1 * boost1);
+        Vector2 pos2 = new Vector2(x2 * boost2, y2 * boost2);
         rigidBody1.AddForce(pos1, ForceMode2D.Impulse);
         rigidBody2.AddForce(pos2, ForceMode2D.Impulse);
+
+
+        
 
         x1 = 0;
         y1 = 0;
         x2 = 0;
         y2 = 0;
+        boost1 = 1;
+        boost2 = 1;
         
      
     }

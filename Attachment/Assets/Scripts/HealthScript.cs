@@ -59,15 +59,18 @@ public class HealthScript : MonoBehaviour {
 		}
 			
 			
-		bar.fillAmount -= Time.deltaTime / decreaseSpeed; //Gradually decreasing the amount of health
+		//bar.fillAmount -= Time.deltaTime / decreaseSpeed; //Gradually decreasing the amount of health
 		healthAmount.text = Mathf.RoundToInt(bar.fillAmount * 100).ToString(); //Displaying score
 
+        /*
 		if (bar.fillAmount <= 0) { //Loss condition
 			players.SetActive(false);
 			deathScreen.SetActive (true);
 		}
-
+        */
 	}
+
+
 
 
 
@@ -86,8 +89,41 @@ public class HealthScript : MonoBehaviour {
 		}
 
 	}
-		
-		
-	}
+
+
+    public IEnumerator PointRemove()
+    { //Lerping between the current fillAmount and the fillAmount + pointAmount
+
+        
+        float t = 0;
+
+        while (true)
+        {
+            yield return null;
+            //bar.fillAmount -= 0.002f;
+            bar.fillAmount = Mathf.Lerp(bar.fillAmount, bar.fillAmount - pointAmount / 1000, t / lerpSpeed);
+            t += Time.deltaTime;
+
+            if (t > lerpSpeed)
+            {
+                break;
+            }
+        }
+
+    }
+
+
+    //used to check if a boost is possible 
+    public bool canMove()
+    {
+        if (bar.fillAmount <= 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+
+}
 		
 
