@@ -10,6 +10,8 @@ public class WrapScript : MonoBehaviour {
 	private bool trigger = false;
 	private GameObject collectObject;
 
+	public AudioSource collectSound;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -49,7 +51,8 @@ public class WrapScript : MonoBehaviour {
 			//player1.AddForce (Vector2.up * 300,ForceMode2D.Impulse);
 			//player2.AddForce (Vector2.up * 300,ForceMode2D.Impulse);
 			if(collectObject != null){
-			Destroy (collectObject);
+				Destroy (collectObject);
+				collectSound.Play ();
 			}
 		}
 		
