@@ -5,6 +5,8 @@ public class CollectScript : MonoBehaviour {
 
 	public bool collectTrigger = false;
 
+	public AudioSource fuelSound;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -22,6 +24,8 @@ public class CollectScript : MonoBehaviour {
 			collectTrigger = true;
 			if (other != null) {
 				Destroy (other.gameObject);
+				fuelSound.Play ();
+
 			}
 
 		}
@@ -30,6 +34,7 @@ public class CollectScript : MonoBehaviour {
 			collectTrigger = true;
 			if (other != null) {
 				Destroy (other.gameObject);
+				fuelSound.Play ();
 			}
 
 		}
