@@ -12,19 +12,24 @@ public class SceneLoader : MonoBehaviour {
 	public Text instructions;
 	public Text highScores;
 
+	public AudioSource selectSound;
 
 	public void Start(){
 
 		currentSelect = 1;
 	}
-
+		
 	public void Update(){
+
+//		selector.clip = selectSound;
 
 		if (Input.GetKeyDown ("up") || Input.GetKeyDown ("r")) {
 			if (currentSelect <= 1) {
 				currentSelect = 3;
 			} else
 				currentSelect--;
+
+			selectSound.Play ();
 		}
 
 		if (Input.GetKeyDown ("down") || Input.GetKeyDown ("f")) {
@@ -32,6 +37,8 @@ public class SceneLoader : MonoBehaviour {
 				currentSelect = 1;
 			} else
 				currentSelect++;
+
+			selectSound.Play ();
 
 		}
 

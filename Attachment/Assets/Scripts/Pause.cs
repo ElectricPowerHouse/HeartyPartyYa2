@@ -16,6 +16,8 @@ public class Pause : MonoBehaviour {
 	public Text resumeGame;
 	public Text mainMenu;
 
+	public AudioSource selectSound;
+
 
 	void Start(){
 	
@@ -32,6 +34,8 @@ public class Pause : MonoBehaviour {
 			currentSelect = 2;
 		} else
 			currentSelect--;
+
+			selectSound.Play ();
 	}
 
 	if (Input.GetKeyDown ("down") || Input.GetKeyDown ("f")) {
@@ -39,6 +43,8 @@ public class Pause : MonoBehaviour {
 			currentSelect = 1;
 		} else
 			currentSelect++;
+
+			selectSound.Play ();
 
 	}
 

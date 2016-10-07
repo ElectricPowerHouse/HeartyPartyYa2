@@ -12,6 +12,8 @@ public class GameOverMenu : MonoBehaviour {
 	public Text retry;
 	public Text mainMenu;
 
+	public AudioSource selectSound;
+
 
 	public void Start(){
 
@@ -25,6 +27,8 @@ public class GameOverMenu : MonoBehaviour {
 				currentSelect = 2;
 			} else
 				currentSelect--;
+
+			selectSound.Play ();
 		}
 
 		if (Input.GetKeyDown ("down") || Input.GetKeyDown ("f")) {
@@ -32,6 +36,8 @@ public class GameOverMenu : MonoBehaviour {
 				currentSelect = 1;
 			} else
 				currentSelect++;
+
+			selectSound.Play ();
 
 		}
 
