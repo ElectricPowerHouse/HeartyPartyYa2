@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SpikeMoveScript : MonoBehaviour {
 
+    private float slowBonusTimer = -1f;
 
     public float time;
     private float startSpeed = 0;
@@ -31,13 +32,21 @@ public class SpikeMoveScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+       
 
         time = Time.timeSinceLevelLoad / 25;
 
-
         transform.Rotate(Vector3.forward * 0);
 
-        velocity = new Vector2(0, speed);
+        if (slowBonusTimer > 0)
+        {
+            velocity = new Vector2(0, -60f);
+        }
+        else
+        {
+            velocity = new Vector2(0, speed);
+        }
+        
         rigidBody.velocity = velocity;
 
         if (Time.timeScale != 0)
@@ -45,5 +54,10 @@ public class SpikeMoveScript : MonoBehaviour {
             speed -= time;
         }
 
+    }
+
+    public void slowBonus(float timer)
+    {
+        slowBonusTimer = timer;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BlockMoveScript : MonoBehaviour {
 
+    private float slowBonusTimer = -1f;
 
 	public float time;
 	private float startSpeed = 0;
@@ -26,7 +27,7 @@ public class BlockMoveScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		speed = startSpeed + Random.Range(-100,0);
+		speed = startSpeed + Random.Range(-100,-10);
 
         rotateAmount = Random.Range(rotateMin, rotateMax);
 
@@ -40,16 +41,33 @@ public class BlockMoveScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		time = Time.timeSinceLevelLoad/25;
+
+
+        time = Time.timeSinceLevelLoad/25;
 
 
         transform.Rotate(Vector3.forward * rotateAmount);
 
-		velocity = new Vector2 (0, speed);
+        if (slowBonusTimer > 0)
+        {
+            //print("slow!");
+            velocity = new Vector2(0, -60f);
+           
+        }
+        else
+        {
+            velocity = new Vector2(0, speed);
+        }
+
         rigidBody.velocity = velocity;
 	
 		if (Time.timeScale != 0) {
 			speed -= time;
 		}
 	}
+
+    public void slowBonus(float timer)
+    {
+        slowBonusTimer = timer;
+    }
 }

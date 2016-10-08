@@ -12,14 +12,46 @@ public class WrapScript : MonoBehaviour {
 
 	public AudioSource collectSound;
 
+
+    //gettings scripts for powerups
+    public GameObject spawner;
+    public SpawnerScript spawnerScript;
+    public BlockMoveScript blockMoveScript;
+    public GameObject control;
+    public MovementScript movementScript;
+
+    //powerup scripts
+   // private bool slowBonusActive = false;
+    private float slowBonusTimer = 0f;
+
+
 	// Use this for initialization
 	void Start () {
-		
+
+        movementScript = control.GetComponent<MovementScript>();
+        spawnerScript = spawner.GetComponent<SpawnerScript>();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (slowBonusTimer > -1f)
+        {
+            slowBonusTimer -= Time.deltaTime;
+          
+          
+            
+           
+        }
+
+        if(slowBonusTimer > 0f)
+        {
+            callScriptOnBlocks();
+        }
+        
+
+        
 		
 	}
 
@@ -45,18 +77,74 @@ public class WrapScript : MonoBehaviour {
 	void InvokeTrigger(){
 		if (trigger == true) {
 
-			//Why is adding a force to the player objects causing the rope to break???
+            //Why is adding a force to the player objects causing the rope to break???
 
-			//GetComponent<Rigidbody2D>().AddForce(Vector2.up * 300,ForceMode2D.Impulse);
-			//player1.AddForce (Vector2.up * 300,ForceMode2D.Impulse);
-			//player2.AddForce (Vector2.up * 300,ForceMode2D.Impulse);
-			if(collectObject != null){
-				Destroy (collectObject);
-				collectSound.Play ();
-			}
+            //GetComponent<Rigidbody2D>().AddForce(Vector2.up * 300,ForceMode2D.Impulse);
+            //player1.AddForce (Vector2.up * 300,ForceMode2D.Impulse);
+            //player2.AddForce (Vector2.up * 300,ForceMode2D.Impulse);
+            if (collectObject != null)
+            {
+
+                Destroy(collectObject);
+                collectSound.Play();
+
+                string name = collectObject.name;
+                print(name);
+
+                if (name.Contains("captureBlock1"))
+                {
+                    activateFuelBonus();
+                }
+                else if (name.Contains("captureBlock2"))
+                {
+                    activateDashBonus();
+                }
+                else if (name.Contains("captureBlock3"))
+                {
+                    activateSlowBonus();
+                }
+                else
+                {
+
+                }
+              
+               
+
+               
+              
+               
+            }
 		}
 		
 	}
+
+    private void activateFuelBonus()
+    {
+         spawnerScript.fuelPowerup();
+    }
+
+    private void activateDashBonus()
+    {
+        movementScript.dashPowerup();
+    }
+
+
+    private void activateSlowBonus()
+    {
+        this.slowBonusTimer = 5f;
+    }
+
+    private void callScriptOnBlocks()
+    {
+        BlockMoveScript[] blockScripts = Object.FindObjectsOfType(typeof(BlockMoveScript)) as BlockMoveScript[];
+        for (int i = 0; i < blockScripts.Length; i++)
+            blockScripts[i].slowBonus(slowBonusTimer);
+
+
+        SpikeMoveScript[] spikeScripts = Object.FindObjectsOfType(typeof(SpikeMoveScript)) as SpikeMoveScript[];
+        for (int i = 0; i < spikeScripts.Length; i++)
+            spikeScripts[i].slowBonus(slowBonusTimer);
+    }
 
 }
 			

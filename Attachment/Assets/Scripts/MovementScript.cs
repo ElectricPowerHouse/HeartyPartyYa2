@@ -26,6 +26,8 @@ public class MovementScript : MonoBehaviour {
     public Rigidbody2D rigidBody2;
 
 
+    private float dashPowerupTimer = 0;
+
 
     // Use this for initialization
     void Start()
@@ -43,7 +45,12 @@ public class MovementScript : MonoBehaviour {
     void Update()
     {
 
+        if (dashPowerupTimer > 0)
+        {
+          
+            dashPowerupTimer -= Time.deltaTime;
 
+        }
 
 
 
@@ -95,8 +102,13 @@ public class MovementScript : MonoBehaviour {
 
             if (healthScript.canMove())
             {
-                StartCoroutine(healthScript.PointRemove());
+
+                if (!(dashPowerupTimer > 0))
+                {
+                    StartCoroutine(healthScript.PointRemove());
+                }
                 boost1 = boostAmount;
+
             }
 
 
@@ -108,7 +120,10 @@ public class MovementScript : MonoBehaviour {
 
             if (healthScript.canMove())
             {
-                StartCoroutine(healthScript.PointRemove());
+                if (!(dashPowerupTimer > 0))
+                {
+                    StartCoroutine(healthScript.PointRemove());
+                }
                 boost2 = boostAmount;
             }
         }
@@ -131,6 +146,12 @@ public class MovementScript : MonoBehaviour {
         boost2 = 1;
         
      
+    }
+
+    public void dashPowerup()
+    {
+
+        dashPowerupTimer = 10f;
     }
 
 

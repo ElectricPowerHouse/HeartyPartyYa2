@@ -22,17 +22,20 @@ public class SpawnerScript : MonoBehaviour {
 	public float rate;
 
 
+    private float fuelPowerupTimer = 0;
+    
 
     private float blockDelayMin = 0.6f;
     private float blockDelayMax = 1.5f;
     private float blockDelay = 1f;
 
-    private float captureDelayMin = 8f;
-    private float captureDelayMax = 16;
-    public float captureDelay = 10f;
+    private float captureDelayMin = 1f;
+    private float captureDelayMax = 3;
+    public float captureDelay = 1f;
 
 
-	public float fuelDelay = 8f;
+	private float fuelDelay = 8f;
+    private float fuelDelayBonus = 0.3f;
 
 	// Use this for initialization
 	void Start () {
@@ -40,9 +43,10 @@ public class SpawnerScript : MonoBehaviour {
 
 
         //RectTransform rt = background.GetComponent<RectTransform>();
+        StartCoroutine(captureGenerator());
         StartCoroutine(blockGenerator());
 		StartCoroutine (fuelGenerator ());
-		StartCoroutine (captureGenerator ());
+		
 
 
 	
@@ -50,6 +54,14 @@ public class SpawnerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (fuelPowerupTimer > 0)
+        {
+
+            fuelPowerupTimer -= Time.deltaTime;
+          
+        }
+    
 
 
 		
@@ -104,6 +116,28 @@ public class SpawnerScript : MonoBehaviour {
 		StartCoroutine(fuelGenerator());
 	}
 
+    public IEnumerator fuelGeneratorBonus()
+    {
+        //this will return the method everytime the delay is not reached,
+        //so the rest of the method is not called.
+        yield return new WaitForSeconds(fuelDelayBonus);
+
+
+        //gets a random position between the min and max x values of the background
+        Vector2 newPosition = new Vector2(Random.Range(-(rt.size.x / 2), (rt.size.x / 2)), transform.position.y);
+        transform.position = newPosition;
+
+
+        var newTransform = transform;
+
+        Instantiate(fuel[Random.Range(0, fuel.Length)], newTransform.position, Quaternion.identity);
+
+        if (fuelPowerupTimer > 0)
+        {
+            StartCoroutine(fuelGeneratorBonus());
+        }
+    }
+
 
 
     public IEnumerator captureGenerator()
@@ -137,4 +171,14 @@ public class SpawnerScript : MonoBehaviour {
 			Destroy (other.gameObject);
 		}
 	}
+
+
+    //sets the timer for the powerup to 9 seconds
+    public void fuelPowerup()
+    {
+        fuelPowerupTimer = 3f;
+        StartCoroutine(fuelGeneratorBonus());
+        
+
+    } 
 }
