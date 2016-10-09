@@ -52,6 +52,9 @@ TagManager:
   - name: Background
     uniqueID: 3459929675
     locked: 0
+  - name: BGSprites
+    uniqueID: 1471681689
+    locked: 0
   - name: Fuel
     uniqueID: 676379719
     locked: 0
