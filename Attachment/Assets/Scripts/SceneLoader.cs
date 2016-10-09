@@ -12,10 +12,11 @@ public class SceneLoader : MonoBehaviour {
 	public Text instructions;
 	public Text highScores;
 
-	public AudioSource selectSound;
+	public AudioSource changeSound;
+	public AudioSource startSound;
 
 	public void Start(){
-
+		startSound.mute = false;
 		currentSelect = 1;
 	}
 		
@@ -29,7 +30,7 @@ public class SceneLoader : MonoBehaviour {
 			} else
 				currentSelect--;
 
-			selectSound.Play ();
+			changeSound.Play ();
 		}
 
 		if (Input.GetKeyDown ("down") || Input.GetKeyDown ("f")) {
@@ -38,13 +39,14 @@ public class SceneLoader : MonoBehaviour {
 			} else
 				currentSelect++;
 
-			selectSound.Play ();
+			changeSound.Play ();
 
 		}
 
 		if (Input.GetKeyDown (KeyCode.LeftControl) || Input.GetKeyDown ("a")) {
 
 			enterPressed ();
+			startSound.mute = false;
 		}
 
 		changeSelector ();

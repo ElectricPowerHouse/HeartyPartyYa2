@@ -17,6 +17,7 @@ public class Pause : MonoBehaviour {
 	public Text mainMenu;
 
 	public AudioSource selectSound;
+	public AudioSource startSound;
 
 
 	void Start(){
