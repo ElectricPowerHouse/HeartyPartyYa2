@@ -23,6 +23,7 @@ public class WrapScript : MonoBehaviour {
     //powerup scripts
    // private bool slowBonusActive = false;
     private float slowBonusTimer = 0f;
+	private float ropeBonusTimer = 0f;
 
 
 	// Use this for initialization
@@ -39,11 +40,15 @@ public class WrapScript : MonoBehaviour {
         if (slowBonusTimer > -1f)
         {
             slowBonusTimer -= Time.deltaTime;
-          
-          
+        
             
-           
         }
+
+		if (ropeBonusTimer > 0f) {
+
+			print (ropeBonusTimer);
+			ropeBonusTimer -= Time.deltaTime;
+		}
 
         if(slowBonusTimer > 0f)
         {
@@ -65,6 +70,15 @@ public class WrapScript : MonoBehaviour {
 			trigger = true;
 			Invoke ("InvokeTrigger", 0.5f);
 
+		}
+
+		if (other.gameObject.tag == "block" && ropeBonusTimer > 0 && this.tag == "rope") {
+
+			if (other != null) {
+
+				Destroy(other.gameObject);
+
+			}
 		}
 
 	}
@@ -93,19 +107,22 @@ public class WrapScript : MonoBehaviour {
 
                 if (name.Contains("captureBlock1"))
                 {
+					//activateRopeBonus ();
                     activateFuelBonus();
                 }
                 else if (name.Contains("captureBlock2"))
                 {
+					//activateRopeBonus ();
                     activateDashBonus();
                 }
                 else if (name.Contains("captureBlock3"))
                 {
+					//activateRopeBonus ();
                     activateSlowBonus();
                 }
                 else
                 {
-
+					activateRopeBonus ();
                 }
               
                
@@ -133,6 +150,11 @@ public class WrapScript : MonoBehaviour {
     {
         this.slowBonusTimer = 5f;
     }
+
+	private void activateRopeBonus()
+	{
+		this.ropeBonusTimer = 9f;
+	}
 
     private void callScriptOnBlocks()
     {
