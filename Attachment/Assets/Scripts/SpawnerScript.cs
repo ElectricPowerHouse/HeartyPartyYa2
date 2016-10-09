@@ -11,7 +11,8 @@ public class SpawnerScript : MonoBehaviour {
 
 
     public GameObject[] prefabs;
-	public GameObject[] fuel;
+//	public GameObject[] fuel;
+	public GameObject fuel;
     public GameObject[] captureBlocks;
 
 	public float changeSpawn = 0.00001f;
@@ -111,7 +112,8 @@ public class SpawnerScript : MonoBehaviour {
 
 		var newTransform = transform;
 
-		Instantiate(fuel[Random.Range(0, fuel.Length)],newTransform.position,Quaternion.identity);
+//		Instantiate(fuel[Random.Range(0, fuel.Length)],newTransform.position,Quaternion.identity);
+		Instantiate(fuel,newTransform.position,Quaternion.identity);
 
 		StartCoroutine(fuelGenerator());
 	}
@@ -130,7 +132,8 @@ public class SpawnerScript : MonoBehaviour {
 
         var newTransform = transform;
 
-        Instantiate(fuel[Random.Range(0, fuel.Length)], newTransform.position, Quaternion.identity);
+//        Instantiate(fuel[Random.Range(0, fuel.Length)], newTransform.position, Quaternion.identity);
+		Instantiate(fuel, newTransform.position, Quaternion.identity);
 
         if (fuelPowerupTimer > 0)
         {

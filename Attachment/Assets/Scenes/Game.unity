@@ -791,11 +791,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 289be8ffb8cd340d78a0136b0802694e, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &213504263 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000010115401248, guid: cc730f7d00770494fa2651816f3362f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1532406026}
 --- !u!1 &214177304 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000012778593312, guid: 33e04383b34d74690bd05ee11b0dfff9,
@@ -1144,6 +1139,7 @@ RectTransform:
   - {fileID: 1450881319}
   - {fileID: 562626851}
   - {fileID: 431789971}
+  - {fileID: 1653613381}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_AnchorMin: {x: 0, y: 0}
@@ -1902,6 +1898,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectTrigger: 0
+  control: {fileID: 823536475}
+  scoreManager: {fileID: 0}
   fuelSound: {fileID: 1839021293}
 --- !u!1001 &559126975
 Prefab:
@@ -2329,7 +2327,6 @@ MonoBehaviour:
   background: {fileID: 643987047}
   deathScreen: {fileID: 328695969}
   players: {fileID: 645580900}
-  gameOverSound: {fileID: 1653613380}
 --- !u!61 &643987047
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3755,6 +3752,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectTrigger: 0
+  control: {fileID: 823536475}
+  scoreManager: {fileID: 0}
   fuelSound: {fileID: 1839021293}
 --- !u!1 &1020841092
 GameObject:
@@ -5808,7 +5807,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ea0a14f3fb95e40b09a2039250582bd1, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5878,13 +5877,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1653613379}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1455317, y: -1.6545513, z: -1.625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 13.556501, y: -7.130727, z: -1.625}
+  m_LocalScale: {x: 4.3097644, y: 4.3097644, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_Father: {fileID: 328695973}
+  m_RootOrder: 8
 --- !u!1 &1687398316 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000011364070794, guid: 0f436bdaf9f1eef4686f555102f20b35,
@@ -6072,11 +6071,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!1 &1849749628 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000011705078232, guid: 3b3da9ad330e3402b940bfaedc72dbc3,
-    type: 2}
-  m_PrefabInternal: {fileID: 2061265193}
 --- !u!1001 &1874916322
 Prefab:
   m_ObjectHideFlags: 0
@@ -6446,9 +6440,7 @@ MonoBehaviour:
   - {fileID: 955306006}
   - {fileID: 1207742367}
   - {fileID: 1525526912}
-  fuel:
-  - {fileID: 213504263}
-  - {fileID: 1849749628}
+  fuel: {fileID: 1000011705078232, guid: 3b3da9ad330e3402b940bfaedc72dbc3, type: 2}
   captureBlocks:
   - {fileID: 1181097602}
   - {fileID: 1023120131}

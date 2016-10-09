@@ -25,9 +25,6 @@ public class ScoreManager : MonoBehaviour {
 	void Update () {
 
 
-	
-
-
 		if (deathScreen.active == false) {
 			scoreCount += pointsPerSecond * Time.deltaTime;
 
@@ -50,5 +47,9 @@ public class ScoreManager : MonoBehaviour {
 		seconds = (int)ellapsedTime % 60;
 
 		finalTimeText.text = string.Format ("{0:00}:{1:00}", minutes, seconds);
+	}
+
+	public void addScore(float score){
+		scoreCount += score;
 	}
 }

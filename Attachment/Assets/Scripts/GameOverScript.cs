@@ -13,7 +13,6 @@ public class GameOverScript : MonoBehaviour {
 	public GameObject deathScreen;
 	public GameObject players;
 
-	public AudioSource gameOverSound;
 
 	// Use this for initialization
 	void Start () {
@@ -45,10 +44,6 @@ public class GameOverScript : MonoBehaviour {
 
 		if (other.gameObject.name == "Player2") {
 			player2In = false;
-		}
-
-		if (!player1In && !player2In) {
-			gameOverSound.Play ();
 		}
 			
 	}

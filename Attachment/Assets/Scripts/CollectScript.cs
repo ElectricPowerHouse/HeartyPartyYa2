@@ -5,11 +5,14 @@ public class CollectScript : MonoBehaviour {
 
 	public bool collectTrigger = false;
 
+	public GameObject control;
+	public ScoreManager scoreManager;
+
 	public AudioSource fuelSound;
 
 	// Use this for initialization
 	void Start () {
-	
+		scoreManager = control.GetComponent<ScoreManager> ();
 	}
 	
 	// Update is called once per frame
@@ -19,22 +22,25 @@ public class CollectScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 
-		if (other.tag == "player1" && this.tag == "player1") {
+		if (other.tag == "player1" && this.tag == "player2") {
 			
 			collectTrigger = true;
 			if (other != null) {
 				Destroy (other.gameObject);
 				fuelSound.Play ();
+				scoreManager.addScore (2);
 
 			}
 
 		}
+//		else if(other.tag == "player2" && this.tag == "player2"){
 		else if(other.tag == "player2" && this.tag == "player2"){
 			
 			collectTrigger = true;
 			if (other != null) {
 				Destroy (other.gameObject);
 				fuelSound.Play ();
+				scoreManager.addScore (2);
 			}
 
 		}
