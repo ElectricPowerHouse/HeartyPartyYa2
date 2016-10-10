@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\BackgroundMove.cs" />
      <Compile Include="Assets\Scripts\BackgroundScript.cs" />
      <Compile Include="Assets\Scripts\BackgroundSprite.cs" />
+     <Compile Include="Assets\Scripts\Blinky.cs" />
      <Compile Include="Assets\Scripts\BlockMoveScript.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
      <Compile Include="Assets\Scripts\CollectScript.cs" />
