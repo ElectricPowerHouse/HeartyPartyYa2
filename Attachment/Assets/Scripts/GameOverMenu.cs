@@ -11,6 +11,7 @@ public class GameOverMenu : MonoBehaviour {
 
 	public Text retry;
 	public Text mainMenu;
+	public Text highscore;
 
 	public AudioSource selectSound;
 
@@ -24,7 +25,7 @@ public class GameOverMenu : MonoBehaviour {
 
 		if (Input.GetKeyDown ("up") || Input.GetKeyDown ("r")) {
 			if (currentSelect <= 1) {
-				currentSelect = 2;
+				currentSelect = 3;
 			} else
 				currentSelect--;
 
@@ -32,7 +33,7 @@ public class GameOverMenu : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown ("down") || Input.GetKeyDown ("f")) {
-			if (currentSelect >= 2) {
+			if (currentSelect >= 3) {
 				currentSelect = 1;
 			} else
 				currentSelect++;
@@ -62,7 +63,10 @@ public class GameOverMenu : MonoBehaviour {
 			selector.transform.position = retry.transform.position + new Vector3(50,-5,0);
 			break;
 		case 2:
-			selector.transform.position = mainMenu.transform.position + new Vector3(50,-5,0);
+			selector.transform.position = highscore.transform.position + new Vector3(68,-5,0);
+			break;
+		case 3: 
+			selector.transform.position = mainMenu.transform.position + new Vector3 (50, -5, 0);
 			break;
 		
 
@@ -82,9 +86,11 @@ public class GameOverMenu : MonoBehaviour {
 			SceneManager.LoadScene ("Game");
 			break;
 		case 2:
+			SceneManager.LoadScene ("HighScoreEnter");
+			break;
+		case 3:
 			SceneManager.LoadScene ("MainMenu");
 			break;
-
 
 		}
 
